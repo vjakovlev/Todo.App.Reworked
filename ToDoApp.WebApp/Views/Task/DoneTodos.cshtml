@@ -1,0 +1,52 @@
+﻿@model DoneViewModel
+@{
+    ViewData["Title"] = "Done ToDo`s";
+}
+
+<div class="jumbotron ">
+    <h2>Done ToDo`s</h2>
+
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Importance of ToDo</th>
+                <th scope="col">Type of ToDo</th>
+                <th scope="col">SubTask`s</th>
+                <th scope="col">Details of ToDo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var todo in Model.DoneTasks)
+            {
+            <tr>
+                <td>@todo.Title</td>
+                <td>@todo.Descrition</td>
+                <td>@todo.ImporanceOfTask</td>
+                <td>@todo.TypeOfTodo</td>
+                <td>
+                    @if (todo.SubTasks == null)
+                    {
+                        <p>No SubTasks</p>
+                    }
+                    else
+                    {
+                        @for (int i = 0; i < todo.SubTasks.Count; i++)
+                        {
+
+                            @Html.Partial("~/Views/Shared/_SubTaskViewModel.cshtml", todo.SubTasks[i]);
+                        }
+                    }
+                </td>
+                <td>
+                    <button class="btn btn-success">@Html.ActionLink("Go to details", "TaskDetails", "Task", new { id = todo.Id })</button>
+                </td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+

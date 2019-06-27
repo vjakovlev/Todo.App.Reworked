@@ -1,0 +1,24 @@
+﻿@model AddSubTaskViewModel
+@{
+    ViewData["Title"] = "Add SubTask";
+}
+
+<div class="jumbotron">
+    <h2>Add SubTask</h2>
+
+    <label>How many subtasks do you want to add:</label>
+
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            <div class="col-md-2">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger" type="submit">SubTask`s</button>
+                    </span>
+                    @Html.TextBoxFor(x => x.NumberOfSubTask, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,92 @@
+﻿@model TaskDetailsViewModel
+@{
+    ViewData["Title"] = "TaskDetails";
+}
+
+<div class="jumbotron">
+    @using (Html.BeginForm())
+    {
+        <div class="hidden">
+            <span class="input-group-addon">@Html.Label(expression: $"model.Id")</span>
+            @Html.TextBox($"model.Id", Model.Id, null, new { @class = "form-control" })
+        </div>
+        <div class="row">
+            <div class="input-group">
+                <span class="input-group-addon">@Html.Label(expression: $"model.Title")</span>
+                @Html.TextBox($"model.Title", Model.Title, null, new { @class = "form-control" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="input-group col-md-4">
+                <span class="input-group-addon">@Html.Label(expression: $"model.Imporance of Task")</span>
+                @Html.DropDownList($"model.ImporanceOfTask", Html.GetEnumSelectList(Model.ImporanceOfTask.GetType()), new { Model.ImporanceOfTask, @class = "form-control" })
+            </div>
+            <div class="input-group col-md-4">
+                <span class="input-group-addon">@Html.Label(expression: $"model.Status of Task")</span>
+                @Html.DropDownList($"model.Status", Html.GetEnumSelectList(Model.Status.GetType()), new { Model.ImporanceOfTask, @class = "form-control" })
+            </div>
+            <div class="input-group col-md-4">
+                <span class="input-group-addon">@Html.Label(expression: $"model.Type of Task")</span>
+                @Html.DropDownList($"model.TypeOfTodo", Html.GetEnumSelectList(Model.TypeOfTodo.GetType()), new { Model.TypeOfTodo, @class = "form-control" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-group">
+                <span class="input-group-addon">@Html.Label(expression: $"model.Descrition")</span>
+                @Html.TextBox($"model.Descrition", Model.Descrition, null, new { @class = "form-control" })
+            </div>
+        </div>
+        <br />
+
+
+
+
+        @*<div class="row">
+                <h2>Subtasks:</h2>
+                @for (int i = 0; i < Model.SubTasks.Count; i++)
+                {
+                    <p><b>Subtask no.@(i + 1)</b></p>
+                    <div class="input-group">
+                        @Html.Partial("~/Views/Shared/_SubTaskDetailViewModel.cshtml", Model.SubTasks[i])
+                    </div>
+                }
+            </div>*@
+
+        <div class="row">
+            <h2>Subtasks:</h2>
+            @for (int i = 0; i < Model.SubTasks.Count; i++)
+            {
+                <h1>SubTask no: @(i + 1)</h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon">@Html.Label(expression: $"model.[{i}].Title")</span>
+                            @Html.TextBox($"model.SubTasks[{i}].Title", Model.SubTasks[i].Title, null, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon">@Html.Label(expression: $"model.[{i}].Descrition")</span>
+                            @Html.TextBox($"model.SubTasks[{i}].Descrition", Model.SubTasks[i].Descrition, null, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon">@Html.Label(expression: $"model.SubTasks[{i}].SubStatus")</span>
+                            @Html.DropDownList($"model.SubTasks[{i}].SubStatus", Html.GetEnumSelectList(Model.SubTasks[i].SubStatus.GetType()), new { Model.SubTasks[i].SubStatus, @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+
+        <div class="row center-block">
+            <button class="btn btn-danger" type="submit">Save Changes</button>
+        </div>
+
+
+    }
+</div>
+
